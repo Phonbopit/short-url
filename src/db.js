@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import chalk from 'chalk';
 
-export default function() {
+function db() {
 
   const db = mongoose.connect('mongodb://localhost:27017/short_url_db', err => {
 
@@ -20,3 +20,15 @@ export default function() {
 
   return db;
 }
+
+const UrlSchema = new mongoose.Schema({
+  original_url: String,
+  shorten_url: {
+    unique: true,
+    type: String
+  }
+});
+
+const URL = mongoose.model('Url', UrlSchema);
+
+export {db, URL}
