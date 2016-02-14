@@ -5,13 +5,12 @@ Simple URL Shortener with Node.js and Hapi.js
 ## Prerequisite
 
 - MongoDB
-- Babel CLI
+- ~~Babel CLI~~ use babel devDependencies instead.
 
 Install with : 
 
 ```
 brew install mongodb
-npm install babel-cli -g
 ```
 
 ## Usage
