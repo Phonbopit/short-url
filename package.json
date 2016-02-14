@@ -10,9 +10,9 @@
     "vision": "^4.0.1"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel src -d dist",
+    "build": "./node_modules/.bin/babel src -d dist --copy-files",
     "dev": "npm run watch-js & npm run watch-server",
-    "watch-js": "./node_modules/.bin/babel src -w -d dist",
+    "watch-js": "./node_modules/.bin/babel src -w -d dist --copy-files",
     "watch-server": "nodemon dist/index.js",
     "start": "node dist/index.js"
   }

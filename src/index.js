@@ -2,9 +2,10 @@ import Hapi from 'hapi';
 import chalk from 'chalk';
 import vision from 'vision';
 import handlebars from 'handlebars';
-import DB from './db';
+import {db, URL} from './db';
 
-const db = DB();
+db(); // invoke db function to connect mongoDB.
+
 const server = new Hapi.Server();
 
 server.connection({
@@ -27,15 +28,25 @@ server.route({
   method: 'GET',
   path: '/',
   handler: (request, reply) => {
-
-    var url = encodeURIComponent(request.params.url);
-
     reply.view('index');
+  }
+})
 
-    //TODO
+server.route({
+  method: 'GET',
+  path: '/{url}',
+  handler: (request, reply) => {
 
-    // 1. find a url in database
-    // 2. return original url.
+    var shortenUrl = encodeURIComponent(request.params.url);
+
+    URL.findOne({shorten_url: shortenUrl}, (err, url) => {
+
+      if (err) {
+        reply({message: err});
+      } else {
+        reply.redirect(url.original_url);
+      }
+    });
   }
 });
 
@@ -44,12 +55,25 @@ server.route({
   path: '/',
   handler: (request, reply) => {
 
-    var url = request.payload.url;
+    var originalUrl = request.payload.url;
 
-    //TODO
+    URL.count({}, (err, num) => {
 
-    //1. save original to database.
-    //2. generate short url
+      let shorter = new URL({
+        original_url: originalUrl,
+        shorten_url: num + 1
+      });
+
+      shorter.save(err => {
+
+        if (err) {
+          reply({message: err});
+        } else {
+          reply(`Shortend URL is : ${server.info.uri}/${shorter.shorten_url}`);
+        }
+
+      });
+    });
   }
 });
 
