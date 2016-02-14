@@ -25,3 +25,5 @@ npm run dev
 
 npm start
 ```
+
+Open [http://localhost:5555/](http://localhost:5555) and have fun :)
