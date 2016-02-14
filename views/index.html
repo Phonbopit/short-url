@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shorten URL with Hapi.js</title>
+    <style>
+        * {
+            font-size: 18px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        input {
+            height: 60px;
+            padding: 5px 10px;
+            width: 480px;
+            text-align: center;
+        }
+
+        button {
+            height: 74px;
+            padding: 5px 15px;
+            background-color: #f36;
+            color: #fff;
+            border: 0;
+        }
+
+        .result {
+            background-color: #fdfdfd;
+            color: #f36;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST" action="/" name="shortenUrl">
+            <input id="url" type="text" placeholder="Paste a link to shorten url">
+            <button type="submit">SHORTEN</button>
+        </form>
+    </div>
+</body>
+
+</html>
